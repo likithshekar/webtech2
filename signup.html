@@ -18,8 +18,6 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="home.html">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -28,8 +26,22 @@
         </div>
     </nav>
 
-    <form method="POST" action="signup.php">
-    </form>
+    <div class="col-md-6 main">
+
+        <form action="/sign_up" method="post">
+            <input class="box" type="text" name="name" id="name" placeholder="Name" required /><br>
+            <input class="box" type="email" name="email" id="email" placeholder="E-Mail " required /><br>
+            <input class="box" type="username" name="username" id="username" placeholder="Username " required /><br>
+            <input class="box" type="password" name="password" id="password" placeholder="Password " required/><br>
+            <input class="box" type="text" name="phone" id="phone" placeholder="Phone Number " required/><br>
+            <input class="box" type="number" name="age" id="age" placeholder="Age " required /><br>
+            <input class="box" type="number" name="weight" id="weight" placeholder="Weight(in kgs) " required /><br>
+            <br>
+            <input type="submit" id="submitDetails" name="submitDetails" value="Submit" /><br>
+
+        </form>
+
+    </div>
 
 </body>
 
