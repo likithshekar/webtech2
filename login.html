@@ -29,18 +29,10 @@
     <!-- Body section -->
 
     <form method="POST" action="login.php">
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Username">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>
-        </div><br>
+        <label for="username">Username</label>
+        <input type="username" class="form-control" id="username" placeholder="Username " required /><br>
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password " required/><br>
         <button type="submit" class="btn btn-primary">Sign in</button>
     </form>
 </body>
