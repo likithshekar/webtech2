@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="User Welcome Page">
-    <meta name="author" content="Saptarshi Ghosh">
+    <meta name="author" content="PESU Project">
     <link rel="icon" href="img/favicon.png">
 
     <!-- CSS -->

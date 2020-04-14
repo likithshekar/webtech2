@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Online Medicine Catalogue">
-    <meta name="author" content="Saptarshi Ghosh">
+    <meta name="author" content="PESU Proj">
     <link rel="icon" href="img/favicon.png">
 
 
@@ -58,9 +58,6 @@
             <a class="nav-link" href="#">Drug Info <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Admin.html">Admin CP</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="user.php">Log - In</a>
           </li>
         </ul>
@@ -81,15 +78,14 @@
 
               $server = 'localhost';
               $username = 'root';
-              $password = 'root43214';
+              $password = '';
               $database = 'medicine';
 
               $cid = $_GET['cid'];
 
               $db = mysqli_connect($server, $username, $password, $database)
                     or die('<b>Error Connecting to MySQL Server or Else DB Not Found!</b>');
-                
-
+              
               $query = "SELECT c.cname, m.Name, m.M_ID from components c, medicine m, composition cmp WHERE
                          c.C_ID = $cid AND
                            c.C_ID = cmp.C_ID AND

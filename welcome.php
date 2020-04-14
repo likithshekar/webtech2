@@ -12,9 +12,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="User Welcome Page">
-    <meta name="author" content="Saptarshi Ghosh">
+    <meta name="author" content="PESU Proj">
     <link rel="icon" href="img/favicon.png">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
 
     <!-- CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -68,9 +67,6 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Admin.html">Admin CP</a>
           </li>
         </ul>
         <ul class="navbar-nav navbar-right">

@@ -34,7 +34,7 @@
                 $_SESSION['login_user'] = $myusername;
                 $_SESSION['login_id'] = $row['U_ID'];
          
-                header("location: welcome.php");        //BackUp welcome2.php
+                header("location: welcome.php");
               } else {
                 $error = "Your Login Name or Password is invalid";
               }
@@ -51,7 +51,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Online Medicine Catalogue">
-    <meta name="author" content="Saptarshi Ghosh">
+    <meta name="author" content="PESU Proj">
     <link rel="icon" href="img/favicon.png">
 
 
@@ -97,9 +97,6 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Admin.html">Admin CP</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="user.php">Log - In<span class="sr-only">(current)</span></a>
