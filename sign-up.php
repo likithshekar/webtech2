@@ -60,7 +60,7 @@
           alert('Your Registration is Complete...!');
         });
         </script>";
-  header("location:user.php");
+  header("location:user.html");
   }
 ?>
   

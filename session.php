@@ -21,7 +21,7 @@
    $login_session_last  = $row['last_name'];
    
    if(!isset($_SESSION['login_user'])){
-      header("location:user.php");
+      header("location:user.html");
    }
 
    /*
