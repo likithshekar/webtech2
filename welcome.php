@@ -84,7 +84,6 @@ include('session.php');
 
   </nav>
 
-
   <!-- Main WebPage -->
   <div class="jumbotron">
     <h3 class="display-4" align="center">Welcome!</h3>
@@ -234,7 +233,7 @@ include('session.php');
       echo "<td>" . $row['Stock'] . "</td>";
       echo "</tr>";
     }
-    
+
     echo "</tbody>
           <tfoot>
           <tr>
@@ -242,7 +241,7 @@ include('session.php');
           <td id='amt' colspan=4></td>
           </tr>
           <tr>
-            <td colspan=7><center>Click on Calculate to see the estimate total</center></td>
+            <td colspan=7><center>Click on the link to proceed to payment</center></td>
           </tr>
           </tfoot>
           </table>
@@ -250,7 +249,6 @@ include('session.php');
     echo '</form>';
     ?>
     <br />
-    <button class="btn btn-info" id="calculate" name="calculate" style="float: right; margin-right: 150px;" onclick="init()">Calculate</button>
     <br />
     <button class="btn btn-danger" id="checkout" name="checkout" style="float: right; margin-right: 150px;" onclick="window.location.href='checkout.php'">Check Out!</button>
   </div>
