@@ -50,7 +50,7 @@
     <!-- Metadata -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Online Medicine Catalogue">
+    <meta name="description" content="Pharmacy Website">
     <meta name="author" content="PESU Proj">
     <link rel="icon" href="img/favicon.png">
 
