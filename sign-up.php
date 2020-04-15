@@ -6,7 +6,6 @@
      $database = 'medicine';
      $db = mysqli_connect($server, $username, $password, $database)
            or die('<b>Error Connecting to MySQL Server or Else DB Not Found!</b>');
-      
 
   $firstname = $_POST['fname'];
   $lastname = $_POST['lname'];

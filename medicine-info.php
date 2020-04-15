@@ -123,7 +123,7 @@
 
                     if (mysqli_multi_query($db, $query)) {
                      do {
-                            if ($result = mysqli_store_result($db)) {
+                            if ($result = mysqli_store_result($db, $query)) {
                               if (mysqli_num_rows($result) != 0) {
                                 while ($row = mysqli_fetch_row($result)) {
                                     $t = $row[0];

@@ -101,7 +101,7 @@
 
 
               
-              echo "<h2>Medicines that contain <b>".$row[cname]."</b></h2><br/>";
+              echo "<h2>Medicines that contain <b>".$row['cname']."</b></h2><br/>";
               $mid = $row['M_ID'];
               echo "<h5><a href='medicine-info.php?mid=$mid'>".$row['Name']."&trade;</a></h5><br />";
 

@@ -144,38 +144,39 @@ include('session.php');
             </script>';
 
       echo '<script type="text/javascript">
-            $(document).ready(function () {
-            $("#' . $idcheck . '").change(function() {
-              if($(this).is(":checked")) {
-              var med_id = ' . $id . ';
-              var med_num = document.getElementById("' . $idnum . '").value;
-              var m_oid = ' . $oid . ';
-              $.ajax({
-                    type: "POST",
-                    url: "add_cart.php",
-                    dataType: "html",
-                    data: {
-                          med_id,
-                          med_num,
-                          m_oid
-                    },
-                    cache: false,
-                  });
-          } else {
-              var med_id = ' . $id . ';
-              var med_num = document.getElementById("' . $idnum . '").value;
-              var m_oid = ' . $oid . ';
-              $.ajax({
-                type: "POST",
-                url: "del_cart.php",
-                dataType: "html",
-                data: {
-                      med_id,
-                      med_num,
-                      m_oid
-                },
-                cache: false,
-              });
+        $(document).ready(function () {
+        $("#' . $idcheck . '").change(function() {
+          if($(this).is(":checked")) {
+            var med_id = ' . $id . ';
+            var med_num = document.getElementById("' . $idnum . '").value;
+            var m_oid = ' . $oid . ';
+            $.ajax({
+              type: "POST",
+              url: "add_cart.php",
+              dataType: "html",
+              data: {
+                med_id,
+                med_num,
+                m_oid
+              },
+              cache: false,
+            });
+          } 
+          else {
+            var med_id = ' . $id . ';
+            var med_num = document.getElementById("' . $idnum . '").value;
+            var m_oid = ' . $oid . ';
+            $.ajax({
+              type: "POST",
+              url: "del_cart.php",
+              dataType: "html",
+              data: {
+                med_id,
+                med_num,
+                m_oid
+              },
+              cache: false,
+            });
           }
         });
         });
