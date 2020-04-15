@@ -25,7 +25,7 @@
 
     <script>
         var slideIndex = -1;
-        var n = 5;
+        var n = 10;
         async function showSS() {
             await new Promise(r => setTimeout(r, 1500));
             plusSlide();
@@ -42,7 +42,7 @@
 
         function minusSlide() {
             slideIndex -= 1;
-            if (slideIndex == -1) slideIndex = 4;
+            if (slideIndex == -1) slideIndex = 9;
             slideIndex = slideIndex % n;
             obj.getdetails();
             obj.getDesc();
@@ -185,6 +185,13 @@
         <br /><br />
 
 
+        <script>
+            showSS();
+        </script>
+        <button class="cen" id="prev" type="button" onclick="minusSlide()" style="display:none"><h3><<</h3></button>
+        <div class="cen" id="img"> </div>
+        <div class="cen" id="txt"> </div>
+        <button class="cen" id="next" type="button" onclick="plusSlide()" style="display:none "><h3>>></h3></button>
 
         <div class="form-group" style="width: 500px; margin: 0 auto;">
             <input type="text" name="Keyword" required="required" id="Keyword">
@@ -241,19 +248,11 @@
         <br />
         <br />
 
-        <center>Displaying Table Above</center>
-        <center>Displaying Images Below</center>
+        <center>Displaying Table and Images Above</center>
         <br />
         <br />
     </div>
 
-    <script>
-        showSS();
-    </script>
-    <button class="cen" id="prev" type="button" onclick="minusSlide()" style="display:none"><h3><<</h3></button>
-    <div class="cen" id="img"> </div>
-    <div class="cen" id="txt"> </div>
-    <button class="cen" id="next" type="button" onclick="plusSlide()" style="display:none "><h3>>></h3></button>
 </body>
 
 </html>
