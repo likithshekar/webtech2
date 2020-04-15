@@ -143,6 +143,7 @@
                 echo "</tr>";
                 $sum += $row['Price'] * $row['quantity'];
                 $sum2 += $row['quantity'];
+                $med = $row['M_ID'];
 
             }
 
@@ -186,12 +187,5 @@
     <div id="responsecontainer2"> </div>
     <br />
     <br />
-
-
-    
-
-
-
-
 </body>
 </html>

@@ -39,10 +39,11 @@
 
   if ($gender == 'male') {
     $gender = 'M';
-  } elseif ($gender == 'female') {
+  }
+  elseif ($gender == 'female') {
     $gender = 'F';
-  } else
-  {
+  }
+  else {
     $gender = 'O';
   }
 
