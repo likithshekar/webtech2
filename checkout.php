@@ -100,7 +100,9 @@
     $sum = 0;
     $sum2 = 0;
 
-    $query = "SELECT om.M_ID, m.Name as `Mname`, c.Name as `Cname`, Price, quantity FROM `order_medicine` AS om, `medicine` AS m, `company` as c, `manufacturer` as mf WHERE om.M_ID = m.M_ID AND mf.M_ID = om.M_ID AND mf.C_ID = c.C_ID AND O_ID = $oid;";
+    $query = "SELECT om.M_ID, m.Name as `Mname`, c.Name as `Cname`, Price, quantity 
+    FROM `order_medicine` AS om, `medicine` AS m, `company` as c, `manufacturer` as mf 
+    WHERE om.M_ID = m.M_ID AND mf.M_ID = om.M_ID AND mf.C_ID = c.C_ID AND O_ID = $oid;";
     $result  = mysqli_query($db, $query);
     echo
     "<div id='responsecontainer'><table border='1' class='table table-striped table-hover'>

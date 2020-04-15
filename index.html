@@ -37,7 +37,7 @@
             obj.getdetails();
             obj.getDesc();
             obj.showButtons();
-            setTimeout(plusSlide, 5000);
+            setTimeout(plusSlide, 10000);
         }
 
         function minusSlide() {
@@ -56,14 +56,14 @@
                 fd.append("id", slideIndex);
                 this.xhr1.onreadystatechange = this.showmedia;
                 this.xhr1.timeout = 6000;
-                this.xhr1.open("POST", "http://localhost/webtech2/getImage.php", true);
+                this.xhr1.open("POST", "http://localhost/medicine/getImage.php", true);
                 this.xhr1.responseType = "blob";
                 this.xhr1.send(fd);
             },
             getDesc: function() {
                 this.xhr2.onreadystatechange = this.showdetails;
                 this.xhr2.timeout = 6000;
-                this.xhr2.open("GET", "http://localhost/webtech2/getDetail.php?id=" + slideIndex.toString(), true);
+                this.xhr2.open("GET", "http://localhost/medicine/getDetail.php?id=" + slideIndex.toString(), true);
                 this.xhr2.send();
             },
 

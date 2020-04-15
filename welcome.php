@@ -26,67 +26,6 @@ include('session.php');
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-
-  <script type="text/javascript">
-        var obj1 = {
-            foo: function() {
-                //var obj1=new firstfoo();
-                //var e = document.getElementById("cell");
-                var value = 0;
-                console.log(value);
-                xhr = new XMLHttpRequest();
-                //xhr.timeout=5000;
-                //xhr.ontimeout=obj.backoff;
-                xhr.open("GET", "tochange.php?value=" + value, true)
-                xhr.onreadystatechange = obj1.firstfoo;
-                xhr.send()
-            },
-            firstfoo: function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    var data = this.responseText;
-                    var list = data.split(".");
-                    document.getElementById("amt").innerHTML = list[0]
-                }
-            }
-        }
-
-        setInterval(obj1.foo, 2000);
-
-        function init() {
-            obj = new Data();
-            obj.getData();
-            c = setInterval(obj.showScore, 5000);
-        }
-
-        function Data() {
-            this.getData = function() {
-              var e = document.getElementById("idnum");
-              var value = e.options[e.selectedIndex].value;
-              var pri = document.getElementById("idpri").value;
-              var value = value * pri;
-              console.log(value);
-              xhr = new XMLHttpRequest();
-              xhr.timeout = 5000;
-              xhr.ontimeout = obj.backoff;
-              xhr.open("GET", "tochange.php?value=" + value, true)
-              xhr.onreadystatechange = obj.showScore
-              xhr.send()
-            }
-            this.backoff = function() {
-                console.log("in backoff");
-                clearInterval(c);
-            }
-            this.showScore = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log("i");
-                    var data = this.responseText;
-                    var list = data.split(".");
-                    document.getElementById("amt").innerHTML = list[0]
-                }
-            }
-        }
-    </script>
-
   <!-- Additional Styles -->
   <style type="text/css">
     #responsecontainer {
@@ -152,8 +91,6 @@ include('session.php');
     <br /><br />
 
     <?php
-    $file=file_get_contents("seats.json");
-    $jason=json_decode($file,true);    
     //Get Order ID
     $oid = -1;
     $query = "CALL Insert_User_OrderId();";
@@ -163,7 +100,6 @@ include('session.php');
     $row = mysqli_fetch_array($result);
     $oid = $row['O_ID'];
     $uid = $_SESSION['login_id'];
-    $value = 0;
     $query = "CALL order_insert($oid, $uid);";
     $result = mysqli_query($db, $query);
     $query = "SELECT m.M_ID as `#ID`, m.Name as `Medicine`, c.Name as `Company`, m.Price, s.quantity as 'Stock'
@@ -190,7 +126,6 @@ include('session.php');
       $id = $row['#ID'];
       $idcheck = $id . 'check';
       $idnum = $id . 'num';
-      $idpri = $id. 'Price';
 
       //JAVASCRIPT
       echo '<script type="text/javascript">
@@ -211,7 +146,6 @@ include('session.php');
             var med_id = ' . $id . ';
             var med_num = document.getElementById("' . $idnum . '").value;
             var m_oid = ' . $oid . ';
-            var value = document.getElementById("' . $idpri . '").value * var med_num;
             $.ajax({
               type: "POST",
               url: "add_cart.php",
@@ -282,7 +216,7 @@ include('session.php');
       echo "<td>" . $row['#ID'] . "</td>";
       echo "<td>" . $row['Medicine'] . "</td>";
       echo "<td>" . $row['Company'] . "</td>";
-      echo "<td id='$idpri'>" . $row['Price'] . "</td>";
+      echo "<td>" . $row['Price'] . "</td>";
       echo "<td><div class='checkbox' style='margin-top: auto; margin-bottom: auto; margin-left: auto; padding-left: 50px;'>
                 <label>
                     <input type='checkbox' name='addcheck[]' value=$id  id='$idcheck'><i class='helper'></i></label>

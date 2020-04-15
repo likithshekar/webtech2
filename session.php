@@ -1,5 +1,5 @@
 <?php
-   	$server = 'localhost';
+    $server = 'localhost';
     $username = 'root';
     $password = '';
     $database = 'medicine';
