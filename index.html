@@ -23,6 +23,81 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
+    <script>
+        var slideIndex = -1;
+        var n = 5;
+        async function showSS() {
+            await new Promise(r => setTimeout(r, 1500));
+            plusSlide();
+        }
+
+        function plusSlide() {
+            slideIndex += 1;
+            slideIndex = slideIndex % n;
+            obj.getdetails();
+            obj.getDesc();
+            obj.showButtons();
+            setTimeout(plusSlide, 5000);
+        }
+
+        function minusSlide() {
+            slideIndex -= 1;
+            if (slideIndex == -1) slideIndex = 4;
+            slideIndex = slideIndex % n;
+            obj.getdetails();
+            obj.getDesc();
+            setTimeout(plusSlide, 5000);
+        }
+        var obj = {
+            xhr1: new XMLHttpRequest(),
+            xhr2: new XMLHttpRequest(),
+            getdetails: function() {
+                var fd = new FormData();
+                fd.append("id", slideIndex);
+                this.xhr1.onreadystatechange = this.showmedia;
+                this.xhr1.timeout = 6000;
+                this.xhr1.open("POST", "http://localhost/webtech2/getImage.php", true);
+                this.xhr1.responseType = "blob";
+                this.xhr1.send(fd);
+            },
+            getDesc: function() {
+                this.xhr2.onreadystatechange = this.showdetails;
+                this.xhr2.timeout = 6000;
+                this.xhr2.open("GET", "http://localhost/webtech2/getDetail.php?id=" + slideIndex.toString(), true);
+                this.xhr2.send();
+            },
+
+            showmedia: function() {
+
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.response;
+                    i = document.createElement("img");
+                    i.src = URL.createObjectURL(data);
+                    i.width = "500";
+                    i.height = "300";
+                    var med = document.getElementById("img");
+                    while (med.firstChild)
+                        med.removeChild(med.firstChild);
+                    med.appendChild(i);
+                }
+            },
+
+            showdetails: function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var info = this.response;
+                    document.getElementById("txt").innerHTML = "<i>" + info + "</i>";
+                }
+            },
+
+
+            showButtons: async function() {
+                await new Promise(r => setTimeout(r, 10000));
+                document.getElementById("next").style.display = "block";
+                document.getElementById("prev").style.display = "block";
+            }
+
+        }
+    </script>
 
     <!-- Additional Styles -->
     <style type="text/css">
@@ -37,6 +112,13 @@
             overflow: auto;
             overflow-x: hidden;
             margin: 0 auto;
+        }
+        
+        .cen {
+            text-align: center;
+            font-family: Sans-Serif;
+            margin: auto;
+            padding: 5px;
         }
     </style>
 
@@ -118,30 +200,30 @@
             <div class="form-radio">
                 <div class="radio">
                     <label>
-            		<input type="radio" name="sradio" class="sradio" value="medicine" checked="checked">
-            		<i class="helper"></i>
-            		Medicine
+                        <input type="radio" name="sradio" class="sradio" value="medicine" checked="checked">
+                        <i class="helper"></i>
+                        Medicine
             		</label>
                 </div>
                 <div class="radio">
                     <label>
-            		<input type="radio" name="sradio" class="sradio" value="company">
-            		<i class="helper"></i>
-            		Company
+                        <input type="radio" name="sradio" class="sradio" value="company">
+                        <i class="helper"></i>
+                        Company
             		</label>
                 </div>
                 <div class="radio">
                     <label>
-            		<input type="radio" name="sradio" class="sradio" value="generic">
-            		<i class="helper"></i>
-            		Generic Drug
+                        <input type="radio" name="sradio" class="sradio" value="generic">
+                        <i class="helper"></i>
+                        Generic Drug
             		</label>
                 </div>
                 <div class="radio">
                     <label>
-            		<input type="radio" name="sradio" class="sradio" value="pharm">
-            		<i class="helper"></i>
-            		Pharmacies
+                        <input type="radio" name="sradio" class="sradio" value="pharm">
+                        <i class="helper"></i>
+                        Pharmacies
             		</label>
                 </div>
             </div>
@@ -160,12 +242,18 @@
         <br />
 
         <center>Displaying Table Above</center>
-
+        <center>Displaying Images Below</center>
         <br />
         <br />
     </div>
 
-
+    <script>
+        showSS();
+    </script>
+    <button class="cen" id="prev" type="button" onclick="minusSlide()" style="display:none"><h3><<</h3></button>
+    <div class="cen" id="img"> </div>
+    <div class="cen" id="txt"> </div>
+    <button class="cen" id="next" type="button" onclick="plusSlide()" style="display:none "><h3>>></h3></button>
 </body>
 
 </html>

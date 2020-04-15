@@ -11,9 +11,9 @@
 	$file=file_get_contents("seats.json");
 	$jason=json_decode($file,true);
 	
-	if($value=="AMT"){
+	if($value!=0){
 		if($jason["amt"]>=0){
-			$jason["amt"]=$jason["amt"]+$amt;
+			$jason["amt"]=$jason["amt"]+$value;
 			$newstring=json_encode($jason);
 			file_put_contents("seats.json", $newstring);
 		}

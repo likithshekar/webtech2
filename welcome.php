@@ -32,7 +32,7 @@ include('session.php');
             foo: function() {
                 //var obj1=new firstfoo();
                 //var e = document.getElementById("cell");
-                var value = "blank";
+                var value = 0;
                 console.log(value);
                 xhr = new XMLHttpRequest();
                 //xhr.timeout=5000;
@@ -60,14 +60,17 @@ include('session.php');
 
         function Data() {
             this.getData = function() {
-                var value = "AMT";
-                console.log(value);
-                xhr = new XMLHttpRequest();
-                xhr.timeout = 5000;
-                xhr.ontimeout = obj.backoff;
-                xhr.open("GET", "tochange.php?value=" + value, true)
-                xhr.onreadystatechange = obj.showScore
-                xhr.send()
+              var e = document.getElementById("idnum");
+              var value = e.options[e.selectedIndex].value;
+              var pri = document.getElementById("idpri").value;
+              var value = value * pri;
+              console.log(value);
+              xhr = new XMLHttpRequest();
+              xhr.timeout = 5000;
+              xhr.ontimeout = obj.backoff;
+              xhr.open("GET", "tochange.php?value=" + value, true)
+              xhr.onreadystatechange = obj.showScore
+              xhr.send()
             }
             this.backoff = function() {
                 console.log("in backoff");
@@ -149,6 +152,8 @@ include('session.php');
     <br /><br />
 
     <?php
+    $file=file_get_contents("seats.json");
+    $jason=json_decode($file,true);    
     //Get Order ID
     $oid = -1;
     $query = "CALL Insert_User_OrderId();";
@@ -158,7 +163,7 @@ include('session.php');
     $row = mysqli_fetch_array($result);
     $oid = $row['O_ID'];
     $uid = $_SESSION['login_id'];
-    $sum = 0;
+    $value = 0;
     $query = "CALL order_insert($oid, $uid);";
     $result = mysqli_query($db, $query);
     $query = "SELECT m.M_ID as `#ID`, m.Name as `Medicine`, c.Name as `Company`, m.Price, s.quantity as 'Stock'
@@ -194,7 +199,6 @@ include('session.php');
                 document.getElementById("' . $idcheck . '").click();
                 if (document.getElementById("' . $idnum . '").value == 0) {
                   document.getElementById("' . $idnum . '").value = "1";
-                  
                 }
                 });
             });
@@ -207,6 +211,7 @@ include('session.php');
             var med_id = ' . $id . ';
             var med_num = document.getElementById("' . $idnum . '").value;
             var m_oid = ' . $oid . ';
+            var value = document.getElementById("' . $idpri . '").value * var med_num;
             $.ajax({
               type: "POST",
               url: "add_cart.php",
@@ -233,18 +238,6 @@ include('session.php');
               cache: false,
               success: function(data) {
                 $("#responsecontainer2").html(data);
-              }
-            });
-            $.ajax({
-              type: "GET",
-              url: "tochange.php",
-              dataType: "html",
-              data: {
-
-              },
-              cache: false,
-              success: function(data) {
-                $("#amt").html(data);
               }
             });
           }
