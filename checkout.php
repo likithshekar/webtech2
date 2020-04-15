@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <title>Welcome!</title>
 
     <!-- Metadata -->
@@ -28,29 +27,29 @@
     <!-- Additional Styles -->
     <style type="text/css">
         #responsecontainer {
-            max-width: 1000px;
-            max-height: 700px;
-            height: auto;
-            align-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: auto;
-            overflow-x:hidden;
-            margin: 0 auto;
+          max-width: 1000px;
+          max-height: 700px;
+          height: auto;
+          align-content: center;
+          align-items: center;
+          text-align: center;
+          position: relative;
+          overflow: auto;
+          overflow-x:hidden;
+          margin: 0 auto;
         }
         #responsecontainer2 {
-            max-width: 1000px;
-            max-height: 700px;
-            height: auto;
-            align-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: auto;
-            overflow-x:hidden;
-            margin: 0 auto;
-            margin-bottom: 50px;
+          max-width: 1000px;
+          max-height: 700px;
+          height: auto;
+          align-content: center;
+          align-items: center;
+          text-align: center;
+          position: relative;
+          overflow: auto;
+          overflow-x:hidden;
+          margin: 0 auto;
+          margin-bottom: 50px;
         }
     </style>
 
@@ -101,10 +100,7 @@
     $sum = 0;
     $sum2 = 0;
 
-    $query = "SELECT om.M_ID, m.Name as `Mname`, c.Name as `Cname`, Price, quantity FROM `order_medicine` AS om, `medicine` AS m,
-    `company` as c, `manufacturer` as mf
-        WHERE om.M_ID = m.M_ID AND mf.M_ID = om.M_ID AND mf.C_ID = c.C_ID AND
-        O_ID = $oid;";
+    $query = "SELECT om.M_ID, m.Name as `Mname`, c.Name as `Cname`, Price, quantity FROM `order_medicine` AS om, `medicine` AS m, `company` as c, `manufacturer` as mf WHERE om.M_ID = m.M_ID AND mf.M_ID = om.M_ID AND mf.C_ID = c.C_ID AND O_ID = $oid;";
     $result  = mysqli_query($db, $query);
     echo
     "<div id='responsecontainer'><table border='1' class='table table-striped table-hover'>
@@ -129,8 +125,11 @@
       echo "</tr>";
       $sum += $row['Price'] * $row['quantity'];
       $sum2 += $row['quantity'];
-      $med = $row['M_ID'];
     }
+    $query = "SELECT om.M_ID, s.quantity
+    FROM `order_medicine` AS om, `medicine` AS m, `company` as c, `manufacturer` as mf, stock as s
+    WHERE om.M_ID = m.M_ID AND m.M_ID = s.M_ID AND O_ID = $oid;";
+    $result  = mysqli_query($db, $query);
     echo "</tbody><tfoot><tr><td colspan=3><center>Proceed to Payment!</center></td>
       <td class='btn-info disabled'><b> &#8377; ".$sum." </b></td>
       <td> ".$sum2."</td>
@@ -142,23 +141,22 @@
     <script type="text/javascript">
 
     $(document).ready(function() {
-
-         $("#pay").click(function() {
-          var total = <?php echo $sum; ?>;
-            $.ajax({
-                type: "POST",
-                url: "ret_balance.php",
-                dataType: "html",
-                data: {
-                  total
-                },
-                cache: false,
-                success: function(data) {
-                    $("#responsecontainer2").html(data);
-                }
-            });
-            this.disabled = true;
+      $("#pay").click(function() {
+        var total = <?php echo $sum; ?>;
+        $.ajax({
+          type: "POST",
+          url: "ret_balance.php",
+          dataType: "html",
+          data: {
+            total
+          },
+          cache: false,
+          success: function(data) {
+              $("#responsecontainer2").html(data);
+          }
         });
+        this.disabled = true;
+    });
     });
     </script>
       <button class="btn btn-success" id="pay" name="pay" style="float: right; margin-right: 150px;">Proceed to Payment!</button>

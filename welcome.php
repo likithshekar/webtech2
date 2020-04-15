@@ -160,8 +160,25 @@ include('session.php');
                 m_oid
               },
               cache: false,
+              success: function(data) {
+                $("#responsecontainer2").html(data);
+              }
             });
-          } 
+            $.ajax({
+              type: "POST",
+              url: "stock_dec.php",
+              dataType: "html",
+              data: {
+                med_id,
+                med_num,
+                m_oid
+              },
+              cache: false,
+              success: function(data) {
+                $("#responsecontainer2").html(data);
+              }
+            });
+          }
           else {
             var med_id = ' . $id . ';
             var med_num = document.getElementById("' . $idnum . '").value;
@@ -176,6 +193,23 @@ include('session.php');
                 m_oid
               },
               cache: false,
+              success: function(data) {
+                $("#responsecontainer2").html(data);
+            }
+            });
+            $.ajax({
+              type: "POST",
+              url: "stock_inc.php",
+              dataType: "html",
+              data: {
+                med_id,
+                med_num,
+                m_oid
+              },
+              cache: false,
+              success: function(data) {
+                $("#responsecontainer2").html(data);
+              }
             });
           }
         });
@@ -194,11 +228,11 @@ include('session.php');
 
       echo "<td>  <select name='addqty' id=$idnum>
                     <option selected='selected' disabled='disabled' value='0'></option>
-                    <option value='1'>&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</option>
-                    <option value='2'>&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</option>
-                    <option value='3'>&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</option>
-                    <option value='4'>&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</option>
-                    <option value='5'>&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;</option>
+                    <option value=1>&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</option>
+                    <option value=2>&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</option>
+                    <option value=3>&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</option>
+                    <option value=4>&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</option>
+                    <option value=5>&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;</option>
                   </select></td>";
       echo "<td>" . $row['Stock'] . "</td>";
       echo "</tr>";
