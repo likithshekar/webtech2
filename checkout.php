@@ -58,7 +58,6 @@
 </head>
 
 <body>
-
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#">Navigation</a>
@@ -83,9 +82,7 @@
             <a class="nav-link" href="logout.php">Log - Out</a>
           </li>
         </ul>
-
       </div>
-      
     </nav>
 
 
@@ -95,68 +92,53 @@
       	<br /><br />
 
   <?php
+    //Get Order ID
+    $oid = -1;
+    $query = "SELECT O_ID FROM `order` ORDER BY `O_ID` DESC LIMIT 1";
+    $result  = mysqli_query($db, $query);
+    $row = mysqli_fetch_array($result);
+    $oid = $row['O_ID'];
+    $sum = 0;
+    $sum2 = 0;
 
-
-        //Get Order ID
-        $oid = -1;
-        $query = "SELECT O_ID FROM `order` ORDER BY `O_ID` DESC LIMIT 1";
-        $result  = mysqli_query($db, $query);
-        $row = mysqli_fetch_array($result);
-        $oid = $row['O_ID'];
-        $sum = 0;
-        $sum2 = 0;
-
-                $query = "SELECT om.M_ID, m.Name as `Mname`, c.Name as `Cname`, Price, quantity FROM `order_medicine` AS om, `medicine` AS m,
-                          `company` as c, `manufacturer` as mf
-
-                             WHERE om.M_ID = m.M_ID AND
-                                   mf.M_ID = om.M_ID AND
-                                   mf.C_ID = c.C_ID AND
-        
-                              O_ID = $oid;";
-              
-
-            $result  = mysqli_query($db, $query);
-
-            echo 
-            " <div id='responsecontainer'><table border='1' class='table table-striped table-hover'>
-            <thead>
-                <tr>
-                    <th class='btn-primary'><center>#ID</center></th>
-                    <th class='btn-primary'><center>Medicine</center></th>
-                    <th class='btn-primary'><center>Company</center></th>
-                    <th class='btn-primary'><center>Price</center></th>
-                    <th class='btn-primary'><center>Qty</center></th>
-                </tr>
-            </thead>
-            <tbody>";
-    
-            while ($row = mysqli_fetch_array($result))
-            {      
-
-                echo "<tr>";
-                echo "<td>" . $row['M_ID'] . "</td>";
-                echo "<td>" . $row['Mname'] . "</td>";
-                echo "<td>" . $row['Cname'] . "</td>";
-                echo "<td>" . $row['Price'] . "</td>";
-                echo "<td>" . $row['quantity'] . "</td>";                       
-                echo "</tr>";
-                $sum += $row['Price'] * $row['quantity'];
-                $sum2 += $row['quantity'];
-                $med = $row['M_ID'];
-
-            }
-
-             echo "</tbody><tfoot><tr><td colspan=3><center>Proceed to Payment!</center></td>
-                   <td class='btn-info disabled'><b> &#8377; ".$sum." </b></td>
-                   <td> ".$sum2."</td>
-                   </tr></tfoot></table></div>";
-
-      
+    $query = "SELECT om.M_ID, m.Name as `Mname`, c.Name as `Cname`, Price, quantity FROM `order_medicine` AS om, `medicine` AS m,
+    `company` as c, `manufacturer` as mf
+        WHERE om.M_ID = m.M_ID AND mf.M_ID = om.M_ID AND mf.C_ID = c.C_ID AND
+        O_ID = $oid;";
+    $result  = mysqli_query($db, $query);
+    echo
+    "<div id='responsecontainer'><table border='1' class='table table-striped table-hover'>
+    <thead>
+      <tr>
+        <th class='btn-primary'><center>#ID</center></th>
+        <th class='btn-primary'><center>Medicine</center></th>
+        <th class='btn-primary'><center>Company</center></th>
+        <th class='btn-primary'><center>Price</center></th>
+        <th class='btn-primary'><center>Qty</center></th>
+      </tr>
+    </thead>
+    <tbody>";
+    while ($row = mysqli_fetch_array($result))
+    {
+      echo "<tr>";
+      echo "<td>" . $row['M_ID'] . "</td>";
+      echo "<td>" . $row['Mname'] . "</td>";
+      echo "<td>" . $row['Cname'] . "</td>";
+      echo "<td>" . $row['Price'] . "</td>";
+      echo "<td>" . $row['quantity'] . "</td>";
+      echo "</tr>";
+      $sum += $row['Price'] * $row['quantity'];
+      $sum2 += $row['quantity'];
+      $med = $row['M_ID'];
+    }
+    echo "</tbody><tfoot><tr><td colspan=3><center>Proceed to Payment!</center></td>
+      <td class='btn-info disabled'><b> &#8377; ".$sum." </b></td>
+      <td> ".$sum2."</td>
+      </tr></tfoot></table></div>";
   ?>
-      <br />
-      <br />
-      </div>
+    <br />
+    <br />
+    </div>
     <script type="text/javascript">
 
     $(document).ready(function() {
@@ -165,25 +147,21 @@
           var total = <?php echo $sum; ?>;
             $.ajax({
                 type: "POST",
-                url: "ret_balance.php",        
+                url: "ret_balance.php",
                 dataType: "html",
                 data: {
-                    total
+                  total
                 },
-                cache: false,               
-                success: function(data) {                    
-                    $("#responsecontainer2").html(data); 
+                cache: false,
+                success: function(data) {
+                    $("#responsecontainer2").html(data);
                 }
-
             });
             this.disabled = true;
         });
     });
-
     </script>
       <button class="btn btn-success" id="pay" name="pay" style="float: right; margin-right: 150px;">Proceed to Payment!</button>
-    
-
     <div id="responsecontainer2"> </div>
     <br />
     <br />
