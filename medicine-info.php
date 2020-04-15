@@ -141,8 +141,6 @@
               </div>
 
               <?php
-
-              
               $query = "SELECT * FROM medicine m, med_type t WHERE m.M_ID = $mid AND m.M_ID = t.M_ID;";
               $result = mysqli_query($db, $query);
 
@@ -188,7 +186,6 @@
                   echo "<li><a href='drug-info.php?cid=$cid' style='color:red'>".$row['cname']."</a></font><br />";
                 }
               }
-
 
               $query = "SELECT sname FROM medicine m, symptoms s, treats t
                           WHERE
