@@ -26,6 +26,64 @@ include('session.php');
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
+
+  <script type="text/javascript">
+        var obj1 = {
+            foo: function() {
+                //var obj1=new firstfoo();
+                //var e = document.getElementById("cell");
+                var value = "blank";
+                console.log(value);
+                xhr = new XMLHttpRequest();
+                //xhr.timeout=5000;
+                //xhr.ontimeout=obj.backoff;
+                xhr.open("GET", "tochange.php?value=" + value, true)
+                xhr.onreadystatechange = obj1.firstfoo;
+                xhr.send()
+            },
+            firstfoo: function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = this.responseText;
+                    var list = data.split(".");
+                    document.getElementById("amt").innerHTML = list[0]
+                }
+            }
+        }
+
+        setInterval(obj1.foo, 2000);
+
+        function init() {
+            obj = new Data();
+            obj.getData();
+            c = setInterval(obj.showScore, 5000);
+        }
+
+        function Data() {
+            this.getData = function() {
+                var value = "AMT";
+                console.log(value);
+                xhr = new XMLHttpRequest();
+                xhr.timeout = 5000;
+                xhr.ontimeout = obj.backoff;
+                xhr.open("GET", "tochange.php?value=" + value, true)
+                xhr.onreadystatechange = obj.showScore
+                xhr.send()
+            }
+            this.backoff = function() {
+                console.log("in backoff");
+                clearInterval(c);
+            }
+            this.showScore = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("i");
+                    var data = this.responseText;
+                    var list = data.split(".");
+                    document.getElementById("amt").innerHTML = list[0]
+                }
+            }
+        }
+    </script>
+
   <!-- Additional Styles -->
   <style type="text/css">
     #responsecontainer {
@@ -56,7 +114,7 @@ include('session.php');
   </style>
 </head>
 
-<body>
+<body onload="obj1.foo()">
 
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -100,18 +158,15 @@ include('session.php');
     $row = mysqli_fetch_array($result);
     $oid = $row['O_ID'];
     $uid = $_SESSION['login_id'];
+    $sum = 0;
     $query = "CALL order_insert($oid, $uid);";
     $result = mysqli_query($db, $query);
     $query = "SELECT m.M_ID as `#ID`, m.Name as `Medicine`, c.Name as `Company`, m.Price, s.quantity as 'Stock'
     FROM medicine m, company c, manufacturer mf, stock as s
-    WHERE
-      m.M_ID = mf.M_ID AND s.M_ID = m.M_ID AND
-      mf.C_ID = c.C_ID ORDER BY m.M_ID;";
-
+    WHERE m.M_ID = mf.M_ID AND s.M_ID = m.M_ID AND mf.C_ID = c.C_ID ORDER BY m.M_ID;";
     $result  = mysqli_query($db, $query);
 
-    echo
-      " <div id='responsecontainer'><table border='1' class='table table-striped table-hover'>
+    echo"<div id='responsecontainer'><table border='1' class='table table-striped table-hover'>
     <thead>
       <tr>
         <th class='btn-primary'><center>#ID</center></th>
@@ -130,6 +185,7 @@ include('session.php');
       $id = $row['#ID'];
       $idcheck = $id . 'check';
       $idnum = $id . 'num';
+      $idpri = $id. 'Price';
 
       //JAVASCRIPT
       echo '<script type="text/javascript">
@@ -138,6 +194,7 @@ include('session.php');
                 document.getElementById("' . $idcheck . '").click();
                 if (document.getElementById("' . $idnum . '").value == 0) {
                   document.getElementById("' . $idnum . '").value = "1";
+                  
                 }
                 });
             });
@@ -176,6 +233,18 @@ include('session.php');
               cache: false,
               success: function(data) {
                 $("#responsecontainer2").html(data);
+              }
+            });
+            $.ajax({
+              type: "GET",
+              url: "tochange.php",
+              dataType: "html",
+              data: {
+
+              },
+              cache: false,
+              success: function(data) {
+                $("#amt").html(data);
               }
             });
           }
@@ -220,28 +289,41 @@ include('session.php');
       echo "<td>" . $row['#ID'] . "</td>";
       echo "<td>" . $row['Medicine'] . "</td>";
       echo "<td>" . $row['Company'] . "</td>";
-      echo "<td>" . $row['Price'] . "</td>";
+      echo "<td id='$idpri'>" . $row['Price'] . "</td>";
       echo "<td><div class='checkbox' style='margin-top: auto; margin-bottom: auto; margin-left: auto; padding-left: 50px;'>
                 <label>
                     <input type='checkbox' name='addcheck[]' value=$id  id='$idcheck'><i class='helper'></i></label>
                 </div>";
 
-      echo "<td>  <select name='addqty' id=$idnum>
-                    <option selected='selected' disabled='disabled' value='0'></option>
-                    <option value=1>&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</option>
-                    <option value=2>&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</option>
-                    <option value=3>&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</option>
-                    <option value=4>&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</option>
-                    <option value=5>&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;</option>
-                  </select></td>";
+      echo "<td><select name='addqty' id=$idnum>
+                  <option selected='selected' disabled='disabled' value='0'></option>
+                  <option value=1>&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;</option>
+                  <option value=2>&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;</option>
+                  <option value=3>&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;</option>
+                  <option value=4>&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;</option>
+                  <option value=5>&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;</option>
+                </select>
+            </td>";
       echo "<td>" . $row['Stock'] . "</td>";
       echo "</tr>";
     }
-
-    echo "</tbody><tfoot><tr><td colspan=7><center>Choose the items you want along with the quantity!</center></td></tr></tfoot></table></div>";
+    
+    echo "</tbody>
+          <tfoot>
+          <tr>
+          <td colspan=3>Amount</td>
+          <td id='amt' colspan=4></td>
+          </tr>
+          <tr>
+            <td colspan=7><center>Click on Calculate to see the estimate total</center></td>
+          </tr>
+          </tfoot>
+          </table>
+    </div>";
     echo '</form>';
     ?>
     <br />
+    <button class="btn btn-info" id="calculate" name="calculate" style="float: right; margin-right: 150px;" onclick="init()">Calculate</button>
     <br />
     <button class="btn btn-danger" id="checkout" name="checkout" style="float: right; margin-right: 150px;" onclick="window.location.href='checkout.php'">Check Out!</button>
   </div>
