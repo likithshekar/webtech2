@@ -71,7 +71,7 @@
         </ul>
         <ul class="navbar-nav navbar-right">
           <li class="nav-item disabled">
-            <a class="nav-link"><b>Welcome <?php echo $login_session_last." ".$login_session_first?> !  </b></a>
+            <a class="nav-link"><b>Welcome <?php echo $login_session_first." ".$login_session_last?> !  </b></a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="logout.php">Log - Out</a>
@@ -89,8 +89,6 @@
       	<br /><br />
 
   <?php
-
-
         //Get Order ID
         $oid = -1;
         $query = "CALL Insert_User_OrderId();";

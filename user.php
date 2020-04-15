@@ -40,7 +40,6 @@
               }
             }
             mysqli_close($db);
-              
         ?>
 <html lang="en">
 <head>
