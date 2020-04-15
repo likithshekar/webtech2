@@ -148,8 +148,5 @@ mysqli_close($db);
     <br />
     <br />
   </div>
-
-
 </body>
-
 </html>
