@@ -19,7 +19,6 @@ if (isset($_SESSION['login_user'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
   $myusername = mysqli_real_escape_string($db, $_POST['username']);           //Email
   $mypassword = md5(mysqli_real_escape_string($db, $_POST['password']));      //Password
   //The password is hashed using MD5 Hashing
@@ -29,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
   $count = mysqli_num_rows($result);
-
   if ($count == 1) {
     $_SESSION['login_user'] = $myusername;
     $_SESSION['login_id'] = $row['U_ID'];
 
     header("location: welcome.php");
-  } else {
+  }
+  else {
     $error = "Your Login Name or Password is invalid";
   }
 }
