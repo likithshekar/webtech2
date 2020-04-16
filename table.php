@@ -78,6 +78,55 @@
             }
         }
 
+        elseif ($sradio == "symptom") {
+            if ($keyword == '') {
+                $query = "SELECT m.M_ID as `#ID`, m.Name as `Medicine`, m.Price, s.sname as 'Symptom'
+                        FROM medicine m, symptoms as s, treats as t
+                        WHERE t.S_ID = s.S_ID AND m.M_ID = t.M_ID ORDER BY s.S_ID LIMIT 25;";
+            }
+            else {
+                $query = "SELECT m.M_ID as `#ID`, m.Name as `Medicine`, m.Price, s.sname as `Symptom`
+                        FROM medicine m,, symptoms as s, treats as t
+                        WHERE t.S_ID = s.S_ID AND m.M_ID = t.M_ID AND s.sname LIKE '%$keyword%' ORDER BY s.S_ID LIMIT 25;";
+            }
+            $result  = mysqli_query($db, $query);
+            if (mysqli_num_rows($result) == 0) {
+
+                echo "<table border='1' class='greenTable'><tfoot><tr><td colspan=5>No Results Found!</td></tr></tfoot></table>";
+
+            }
+            else {
+
+            echo
+            " <table border='1' class='greenTable table-hover'>
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Symptom</th>
+                    <th>Medicine</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>";
+
+
+            while ($row = mysqli_fetch_array($result))
+            {
+                $id = $row['#ID'];
+                echo "<tr class='clickable-row' data-href='medicine-info.php?mid=$id' style='cursor: pointer;'>";
+                echo "<td>" . $row['#ID'] . "</td>";
+                echo "<td>" . $row['Symptom'] . "</td>";
+                echo "<td>" . $row['Medicine'] . "</td>";
+                echo "<td>" . $row['Price'] . "</td>";
+                echo "</tr>";
+
+            }
+
+             echo "</tbody><tfoot><tr><td colspan=5>Displaying Top 25 Searches!</td></tr></tfoot></table>";
+
+            }
+        }
+
         elseif ($sradio == "company") {
             if ($keyword == '') {
 

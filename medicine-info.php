@@ -21,7 +21,7 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    
+
 
     <!-- Additional Styles -->
     <style type="text/css">
@@ -85,14 +85,14 @@
 
               $db = mysqli_connect($server, $username, $password, $database)
                     or die('<b>Error Connecting to MySQL Server or Else DB Not Found!</b>');
-                
+
 
               $query = "SELECT * FROM medicine m WHERE m.M_ID = $mid";
 
               $result = mysqli_query($db, $query);
 
               $row = mysqli_fetch_array($result);
-              
+
               echo "<h2>".$row['Name']."&trade;</h2> <button class='btn btn-success' style='float: right; margin-right: 50px;'>In Stock</button><br />";
               echo "<h4>Information</h4><br/>";
               echo $row['Info'];
@@ -106,24 +106,24 @@
                   $query = "
                             CREATE TEMPORARY TABLE IF NOT EXISTS apricetemp AS (
                             SELECT c.C_ID FROM medicine m, composition c WHERE m.M_ID = c.M_ID AND m.M_ID = $mid);
-      
+
                               CREATE TEMPORARY TABLE IF NOT EXISTS bpricetemp AS (
                               SELECT c.C_ID FROM medicine m, composition c WHERE m.M_ID = c.M_ID AND m.M_ID = $mid);
-     
+
                               CREATE TEMPORARY TABLE IF NOT EXISTS cpricetemp AS (
                               SELECT m.M_ID as `M_ID`, m.Name as `Name`, m.Price, c.C_ID FROM medicine m, composition c WHERE m.M_ID = c.M_ID );
-        
+
                               SELECT * FROM cpricetemp WHERE C_ID IN (SELECT * FROM bpricetemp) GROUP BY M_ID
                                HAVING COUNT(*) = (SELECT count(*) FROM apricetemp) ORDER BY Price;
-                               
+
                                ";
 
-                    
+
                     echo "<br /><br /><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Other Similar Medicines&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3><br />";
 
                     if (mysqli_multi_query($db, $query)) {
                      do {
-                            if ($result = mysqli_store_result($db, $query)) {
+                            if ($result = mysqli_store_result($db)) {
                               if (mysqli_num_rows($result) != 0) {
                                 while ($row = mysqli_fetch_row($result)) {
                                     $t = $row[0];
@@ -160,15 +160,15 @@
                   $cid = $row['C_ID'];
                   echo "<li><a href='drug-info.php?cid=$cid'>".$row['cname']."</a><br />";
               }
-              
-              $query = "SELECT cname, C_ID FROM components WHERE components.C_ID = 
+
+              $query = "SELECT cname, C_ID FROM components WHERE components.C_ID =
                          (SELECT C_ID2 AS `cnamereq` FROM medicine m, composition cmp, components c, contraindication cin
 
                             WHERE m.M_ID = $mid AND m.M_ID = cmp.M_ID AND cmp.C_ID = c.C_ID AND c.C_ID = cin.C_ID1)
-            
+
                         UNION
 
-                        SELECT cname, C_ID FROM components WHERE components.C_ID = 
+                        SELECT cname, C_ID FROM components WHERE components.C_ID =
                           (SELECT C_ID1 AS `cnamereq` FROM medicine m, composition cmp, components c, contraindication cin
 
                               WHERE m.M_ID = $mid AND m.M_ID = cmp.M_ID AND cmp.C_ID = c.C_ID AND c.C_ID = cin.C_ID2)";
@@ -198,7 +198,7 @@
                while ($row = mysqli_fetch_array($result)) {
                   echo "<li>".$row['sname']."<br />";
                 }
- 
+
               $query = "SELECT sname FROM medicine m, symptoms s, side_effects t
                           WHERE
                              m.M_ID = $mid AND m.M_ID = t.M_ID AND t.S_ID = s.S_ID;";
@@ -215,7 +215,7 @@
 
                   echo "<li><font style='color:red'>".$row['sname']."</font><br />";
                 }
-              } 
+              }
 
 
               $query = "SELECT * FROM medicine m WHERE m.M_ID = $mid";
@@ -237,14 +237,14 @@
               echo "<b>".$row['Name']." &copy;&trade; </b><br />";
 
               mysqli_close($db);
-              
+
         ?>
 
 
       <br />
       <br />
     </div>
-    
+
 
 </body>
 </html>
