@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 16, 2020 at 10:51 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Host: localhost
+-- Generation Time: Nov 15, 2017 at 02:56 AM
+-- Server version: 5.7.19-log
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `medicine`
 --
+CREATE DATABASE IF NOT EXISTS `medicine` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `medicine`;
 
 DELIMITER $$
 --
@@ -30,7 +32,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addCart` (IN `oid` INT, IN `M_id_x`
 	START TRANSACTION;
 	IF (EXISTS(SELECT * FROM `order_medicine` WHERE O_ID = oid AND M_ID = M_id_x)) THEN
 		UPDATE `order_medicine` SET quantity = q WHERE O_ID = oid AND M_ID = M_id_x;
-	ELSE
+	ELSE 
 		INSERT INTO `order_medicine` VALUES (oid, M_id_x, q);
 	END IF;
 	COMMIT;
@@ -148,19 +150,19 @@ INSERT INTO `composition` (`M_ID`, `C_ID`) VALUES
 (1, 1),
 (2, 1),
 (3, 2),
-(3, 10),
 (4, 2),
-(4, 10),
 (5, 3),
 (5, 4),
 (6, 5),
 (7, 6),
-(7, 10),
 (8, 7),
-(8, 8),
 (9, 7),
+(8, 8),
 (9, 8),
-(10, 9);
+(10, 9),
+(3, 10),
+(4, 10),
+(7, 10);
 
 -- --------------------------------------------------------
 
@@ -216,15 +218,15 @@ CREATE TABLE `manufacturer` (
 --
 
 INSERT INTO `manufacturer` (`M_ID`, `C_ID`) VALUES
-(1, 4),
-(2, 4),
-(3, 5),
-(4, 4),
-(5, 6),
-(6, 3),
 (7, 1),
 (8, 2),
 (9, 2),
+(6, 3),
+(1, 4),
+(2, 4),
+(4, 4),
+(3, 5),
+(5, 6),
 (10, 7);
 
 -- --------------------------------------------------------
@@ -319,7 +321,7 @@ DELIMITER ;
 CREATE TABLE `order` (
   `O_ID` int(11) NOT NULL,
   `T_ID` int(11) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` varchar(45) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -362,119 +364,7 @@ INSERT INTO `order` (`O_ID`, `T_ID`, `time`, `status`) VALUES
 (61, 61, '2017-11-14 20:39:49', 'pending'),
 (62, 62, '2017-11-14 20:41:08', 'pending'),
 (63, 63, '2017-11-14 20:41:52', 'pending'),
-(64, 64, '2017-11-14 21:24:13', 'pending'),
-(65, 65, '2020-04-14 13:46:59', 'pending'),
-(66, 66, '2020-04-14 13:47:15', 'pending'),
-(67, 67, '2020-04-14 13:47:47', 'pending'),
-(68, 68, '2020-04-14 13:47:54', 'pending'),
-(69, 69, '2020-04-14 13:48:03', 'pending'),
-(70, 70, '2020-04-14 13:49:06', 'pending'),
-(71, 71, '2020-04-14 13:50:19', 'pending'),
-(72, 72, '2020-04-14 13:54:40', 'pending'),
-(73, 73, '2020-04-14 14:31:24', 'pending'),
-(74, 74, '2020-04-14 14:35:02', 'pending'),
-(75, 75, '2020-04-15 06:00:36', 'pending'),
-(76, 76, '2020-04-15 06:02:43', 'pending'),
-(77, 77, '2020-04-15 06:04:30', 'pending'),
-(78, 78, '2020-04-15 06:05:19', 'pending'),
-(79, 79, '2020-04-15 06:43:57', 'pending'),
-(80, 80, '2020-04-15 06:44:17', 'pending'),
-(81, 81, '2020-04-15 06:44:24', 'pending'),
-(82, 82, '2020-04-15 06:49:14', 'pending'),
-(83, 83, '2020-04-15 06:55:10', 'pending'),
-(84, 84, '2020-04-15 06:55:35', 'pending'),
-(85, 85, '2020-04-15 07:02:23', 'pending'),
-(86, 86, '2020-04-15 07:11:12', 'pending'),
-(87, 87, '2020-04-15 07:11:23', 'pending'),
-(88, 88, '2020-04-15 07:12:07', 'pending'),
-(89, 89, '2020-04-15 07:12:19', 'pending'),
-(90, 90, '2020-04-15 07:13:46', 'pending'),
-(91, 91, '2020-04-15 07:14:26', 'pending'),
-(92, 92, '2020-04-15 07:16:10', 'pending'),
-(93, 93, '2020-04-15 07:16:34', 'pending'),
-(94, 94, '2020-04-15 07:17:25', 'pending'),
-(95, 95, '2020-04-15 07:17:46', 'pending'),
-(96, 96, '2020-04-15 07:58:03', 'pending'),
-(97, 97, '2020-04-15 08:00:12', 'pending'),
-(98, 98, '2020-04-15 08:00:31', 'pending'),
-(99, 99, '2020-04-15 08:04:08', 'pending'),
-(100, 100, '2020-04-15 08:13:33', 'pending'),
-(101, 101, '2020-04-15 08:30:21', 'pending'),
-(102, 102, '2020-04-15 08:30:40', 'pending'),
-(103, 103, '2020-04-15 08:49:50', 'pending'),
-(104, 104, '2020-04-15 08:53:53', 'pending'),
-(105, 105, '2020-04-15 09:05:11', 'pending'),
-(106, 106, '2020-04-15 09:09:08', 'pending'),
-(107, 107, '2020-04-15 09:35:03', 'pending'),
-(108, 108, '2020-04-15 09:35:12', 'pending'),
-(109, 109, '2020-04-15 09:36:21', 'pending'),
-(110, 110, '2020-04-15 09:37:09', 'pending'),
-(111, 111, '2020-04-15 09:50:43', 'pending'),
-(112, 112, '2020-04-15 09:59:28', 'pending'),
-(113, 113, '2020-04-15 10:00:04', 'pending'),
-(114, 114, '2020-04-15 10:04:10', 'pending'),
-(115, 115, '2020-04-15 10:06:11', 'pending'),
-(116, 116, '2020-04-15 10:20:27', 'pending'),
-(117, 117, '2020-04-15 10:40:54', 'pending'),
-(118, 118, '2020-04-15 10:40:56', 'pending'),
-(119, 119, '2020-04-15 10:41:12', 'pending'),
-(120, 120, '2020-04-15 10:43:04', 'pending'),
-(121, 121, '2020-04-15 10:43:17', 'pending'),
-(122, 122, '2020-04-15 10:43:29', 'pending'),
-(123, 123, '2020-04-15 10:43:48', 'pending'),
-(124, 124, '2020-04-15 10:44:00', 'pending'),
-(125, 125, '2020-04-15 10:48:59', 'pending'),
-(126, 126, '2020-04-15 10:49:45', 'pending'),
-(127, 127, '2020-04-15 10:50:06', 'pending'),
-(128, 128, '2020-04-15 10:51:47', 'pending'),
-(129, 129, '2020-04-15 10:52:04', 'pending'),
-(130, 130, '2020-04-15 10:52:19', 'pending'),
-(131, 131, '2020-04-15 10:53:24', 'pending'),
-(132, 132, '2020-04-15 10:53:39', 'pending'),
-(133, 133, '2020-04-15 10:54:16', 'pending'),
-(134, 134, '2020-04-15 10:54:29', 'pending'),
-(135, 135, '2020-04-15 10:54:46', 'pending'),
-(136, 136, '2020-04-15 10:54:57', 'pending'),
-(137, 137, '2020-04-15 10:55:08', 'pending'),
-(138, 138, '2020-04-15 10:55:18', 'pending'),
-(139, 139, '2020-04-15 10:56:00', 'pending'),
-(140, 140, '2020-04-15 10:56:15', 'pending'),
-(141, 141, '2020-04-15 10:56:27', 'pending'),
-(142, 142, '2020-04-15 10:56:40', 'pending'),
-(143, 143, '2020-04-15 10:57:02', 'pending'),
-(144, 144, '2020-04-15 10:57:12', 'pending'),
-(145, 145, '2020-04-15 11:41:25', 'pending'),
-(146, 146, '2020-04-15 11:42:55', 'pending'),
-(147, 147, '2020-04-15 11:44:18', 'pending'),
-(148, 148, '2020-04-15 11:44:38', 'pending'),
-(149, 149, '2020-04-15 11:45:52', 'pending'),
-(150, 150, '2020-04-15 11:46:14', 'pending'),
-(151, 151, '2020-04-15 11:46:53', 'pending'),
-(152, 152, '2020-04-15 12:03:37', 'pending'),
-(153, 153, '2020-04-15 12:04:52', 'pending'),
-(154, 154, '2020-04-15 12:05:23', 'pending'),
-(155, 155, '2020-04-15 12:13:48', 'pending'),
-(156, 156, '2020-04-15 12:17:15', 'pending'),
-(157, 157, '2020-04-15 12:18:26', 'pending'),
-(158, 158, '2020-04-15 12:30:52', 'pending'),
-(159, 159, '2020-04-15 12:31:38', 'pending'),
-(160, 160, '2020-04-15 12:37:27', 'pending'),
-(161, 161, '2020-04-15 12:43:21', 'pending'),
-(162, 162, '2020-04-15 12:52:25', 'pending'),
-(163, 163, '2020-04-15 12:58:04', 'pending'),
-(164, 164, '2020-04-15 13:02:13', 'pending'),
-(165, 165, '2020-04-15 14:30:32', 'pending'),
-(166, 166, '2020-04-15 14:31:27', 'pending'),
-(167, 167, '2020-04-15 14:31:52', 'pending'),
-(168, 168, '2020-04-15 14:38:29', 'pending'),
-(169, 169, '2020-04-15 14:40:03', 'pending'),
-(170, 170, '2020-04-15 14:46:13', 'pending'),
-(171, 171, '2020-04-15 14:51:06', 'pending'),
-(172, 172, '2020-04-15 17:28:14', 'pending'),
-(173, 173, '2020-04-15 17:30:52', 'pending'),
-(174, 174, '2020-04-15 17:31:12', 'pending'),
-(175, 175, '2020-04-15 17:31:26', 'pending'),
-(176, 176, '2020-04-16 05:54:21', 'pending');
+(64, 64, '2017-11-14 21:24:13', 'pending');
 
 --
 -- Triggers `order`
@@ -599,70 +489,7 @@ INSERT INTO `order_medicine` (`O_ID`, `M_ID`, `quantity`) VALUES
 (64, 1, 1),
 (64, 3, 3),
 (64, 6, 1),
-(64, 7, 4),
-(66, 7, 1),
-(73, 1, 1),
-(74, 1, 1),
-(79, 1, 3),
-(83, 1, 5),
-(84, 1, 5),
-(85, 1, 1),
-(86, 1, 1),
-(87, 1, 1),
-(89, 1, 1),
-(90, 10, 1),
-(91, 10, 1),
-(92, 1, 1),
-(92, 3, 1),
-(93, 1, 1),
-(94, 1, 1),
-(94, 2, 1),
-(95, 3, 5),
-(98, 1, 5),
-(98, 5, 1),
-(101, 1, 5),
-(105, 1, 5),
-(109, 1, 1),
-(112, 2, 1),
-(113, 1, 1),
-(113, 2, 1),
-(114, 1, 1),
-(114, 2, 1),
-(116, 1, 1),
-(118, 1, 2),
-(119, 1, 1),
-(120, 1, 1),
-(121, 1, 5),
-(123, 1, 1),
-(123, 2, 1),
-(126, 1, 2),
-(128, 1, 1),
-(129, 1, 4),
-(131, 1, 1),
-(133, 1, 1),
-(134, 1, 1),
-(135, 2, 1),
-(136, 3, 1),
-(137, 1, 1),
-(138, 1, 1),
-(139, 2, 1),
-(140, 1, 3),
-(141, 2, 1),
-(143, 1, 1),
-(152, 1, 1),
-(155, 1, 1),
-(155, 2, 1),
-(157, 1, 1),
-(159, 1, 1),
-(160, 1, 1),
-(168, 1, 1),
-(169, 1, 1),
-(170, 1, 1),
-(170, 2, 1),
-(172, 1, 3),
-(173, 2, 1),
-(174, 1, 1),
-(174, 2, 3);
+(64, 7, 4);
 
 --
 -- Triggers `order_medicine`
@@ -694,7 +521,7 @@ CREATE TABLE `order_user` (
   `O_ID` int(11) NOT NULL,
   `U_ID` int(11) NOT NULL,
   `transaction_id` int(11) NOT NULL,
-  `time_transact` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `time_transact` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `mode_pay` varchar(45) NOT NULL DEFAULT 'Online Banking'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -715,123 +542,11 @@ INSERT INTO `order_user` (`O_ID`, `U_ID`, `transaction_id`, `time_transact`, `mo
 (62, 1, 62, '2017-11-14 20:41:08', 'Online Banking'),
 (63, 1, 63, '2017-11-14 20:41:52', 'Online Banking'),
 (64, 1, 64, '2017-11-14 21:24:14', 'Online Banking'),
-(66, 1, 66, '2020-04-14 13:47:15', 'Online Banking'),
-(67, 1, 67, '2020-04-14 13:47:47', 'Online Banking'),
-(68, 1, 68, '2020-04-14 13:47:54', 'Online Banking'),
-(69, 1, 69, '2020-04-14 13:48:03', 'Online Banking'),
-(70, 1, 70, '2020-04-14 13:49:06', 'Online Banking'),
-(176, 1, 176, '2020-04-16 05:54:21', 'Online Banking'),
-(65, 3, 65, '2020-04-14 13:46:59', 'Online Banking'),
-(73, 3, 73, '2020-04-14 14:31:24', 'Online Banking'),
-(74, 3, 74, '2020-04-14 14:35:02', 'Online Banking'),
-(75, 3, 75, '2020-04-15 06:00:36', 'Online Banking'),
-(76, 3, 76, '2020-04-15 06:02:43', 'Online Banking'),
-(77, 3, 77, '2020-04-15 06:04:30', 'Online Banking'),
-(78, 3, 78, '2020-04-15 06:05:19', 'Online Banking'),
-(79, 3, 79, '2020-04-15 06:43:57', 'Online Banking'),
-(80, 3, 80, '2020-04-15 06:44:17', 'Online Banking'),
-(81, 3, 81, '2020-04-15 06:44:24', 'Online Banking'),
-(82, 3, 82, '2020-04-15 06:49:14', 'Online Banking'),
-(83, 3, 83, '2020-04-15 06:55:10', 'Online Banking'),
-(84, 3, 84, '2020-04-15 06:55:35', 'Online Banking'),
-(85, 3, 85, '2020-04-15 07:02:23', 'Online Banking'),
-(86, 3, 86, '2020-04-15 07:11:12', 'Online Banking'),
-(87, 3, 87, '2020-04-15 07:11:23', 'Online Banking'),
-(88, 3, 88, '2020-04-15 07:12:07', 'Online Banking'),
-(89, 3, 89, '2020-04-15 07:12:19', 'Online Banking'),
-(90, 3, 90, '2020-04-15 07:13:46', 'Online Banking'),
-(91, 3, 91, '2020-04-15 07:14:26', 'Online Banking'),
-(92, 3, 92, '2020-04-15 07:16:10', 'Online Banking'),
-(93, 3, 93, '2020-04-15 07:16:34', 'Online Banking'),
-(94, 3, 94, '2020-04-15 07:17:25', 'Online Banking'),
-(95, 3, 95, '2020-04-15 07:17:46', 'Online Banking'),
-(96, 3, 96, '2020-04-15 07:58:03', 'Online Banking'),
-(97, 3, 97, '2020-04-15 08:00:12', 'Online Banking'),
-(98, 3, 98, '2020-04-15 08:00:31', 'Online Banking'),
-(99, 3, 99, '2020-04-15 08:04:08', 'Online Banking'),
-(100, 3, 100, '2020-04-15 08:13:33', 'Online Banking'),
-(101, 3, 101, '2020-04-15 08:30:21', 'Online Banking'),
-(102, 3, 102, '2020-04-15 08:30:40', 'Online Banking'),
-(103, 3, 103, '2020-04-15 08:49:50', 'Online Banking'),
-(104, 3, 104, '2020-04-15 08:53:53', 'Online Banking'),
-(105, 3, 105, '2020-04-15 09:05:11', 'Online Banking'),
-(106, 3, 106, '2020-04-15 09:09:08', 'Online Banking'),
-(107, 3, 107, '2020-04-15 09:35:03', 'Online Banking'),
-(108, 3, 108, '2020-04-15 09:35:12', 'Online Banking'),
-(109, 3, 109, '2020-04-15 09:36:21', 'Online Banking'),
-(110, 3, 110, '2020-04-15 09:37:09', 'Online Banking'),
-(111, 3, 111, '2020-04-15 09:50:43', 'Online Banking'),
-(112, 3, 112, '2020-04-15 09:59:28', 'Online Banking'),
-(113, 3, 113, '2020-04-15 10:00:04', 'Online Banking'),
-(114, 3, 114, '2020-04-15 10:04:10', 'Online Banking'),
-(115, 3, 115, '2020-04-15 10:06:11', 'Online Banking'),
-(116, 3, 116, '2020-04-15 10:20:27', 'Online Banking'),
-(117, 3, 117, '2020-04-15 10:40:54', 'Online Banking'),
-(118, 3, 118, '2020-04-15 10:40:56', 'Online Banking'),
-(119, 3, 119, '2020-04-15 10:41:12', 'Online Banking'),
-(120, 3, 120, '2020-04-15 10:43:04', 'Online Banking'),
-(121, 3, 121, '2020-04-15 10:43:17', 'Online Banking'),
-(122, 3, 122, '2020-04-15 10:43:29', 'Online Banking'),
-(123, 3, 123, '2020-04-15 10:43:48', 'Online Banking'),
-(124, 3, 124, '2020-04-15 10:44:00', 'Online Banking'),
-(125, 3, 125, '2020-04-15 10:48:59', 'Online Banking'),
-(126, 3, 126, '2020-04-15 10:49:45', 'Online Banking'),
-(127, 3, 127, '2020-04-15 10:50:06', 'Online Banking'),
-(128, 3, 128, '2020-04-15 10:51:47', 'Online Banking'),
-(129, 3, 129, '2020-04-15 10:52:04', 'Online Banking'),
-(130, 3, 130, '2020-04-15 10:52:19', 'Online Banking'),
-(131, 3, 131, '2020-04-15 10:53:24', 'Online Banking'),
-(132, 3, 132, '2020-04-15 10:53:39', 'Online Banking'),
-(133, 3, 133, '2020-04-15 10:54:16', 'Online Banking'),
-(134, 3, 134, '2020-04-15 10:54:29', 'Online Banking'),
-(135, 3, 135, '2020-04-15 10:54:46', 'Online Banking'),
-(136, 3, 136, '2020-04-15 10:54:57', 'Online Banking'),
-(137, 3, 137, '2020-04-15 10:55:08', 'Online Banking'),
-(138, 3, 138, '2020-04-15 10:55:18', 'Online Banking'),
-(139, 3, 139, '2020-04-15 10:56:00', 'Online Banking'),
-(140, 3, 140, '2020-04-15 10:56:15', 'Online Banking'),
-(141, 3, 141, '2020-04-15 10:56:27', 'Online Banking'),
-(142, 3, 142, '2020-04-15 10:56:40', 'Online Banking'),
-(143, 3, 143, '2020-04-15 10:57:02', 'Online Banking'),
-(144, 3, 144, '2020-04-15 10:57:12', 'Online Banking'),
-(145, 3, 145, '2020-04-15 11:41:25', 'Online Banking'),
-(146, 3, 146, '2020-04-15 11:42:55', 'Online Banking'),
-(147, 3, 147, '2020-04-15 11:44:18', 'Online Banking'),
-(148, 3, 148, '2020-04-15 11:44:38', 'Online Banking'),
-(149, 3, 149, '2020-04-15 11:45:52', 'Online Banking'),
-(150, 3, 150, '2020-04-15 11:46:14', 'Online Banking'),
-(151, 3, 151, '2020-04-15 11:46:53', 'Online Banking'),
-(152, 3, 152, '2020-04-15 12:03:37', 'Online Banking'),
-(153, 3, 153, '2020-04-15 12:04:52', 'Online Banking'),
-(154, 3, 154, '2020-04-15 12:05:23', 'Online Banking'),
-(155, 3, 155, '2020-04-15 12:13:48', 'Online Banking'),
-(156, 3, 156, '2020-04-15 12:17:15', 'Online Banking'),
-(157, 3, 157, '2020-04-15 12:18:26', 'Online Banking'),
-(158, 3, 158, '2020-04-15 12:30:52', 'Online Banking'),
-(159, 3, 159, '2020-04-15 12:31:38', 'Online Banking'),
-(160, 3, 160, '2020-04-15 12:37:27', 'Online Banking'),
-(161, 3, 161, '2020-04-15 12:43:21', 'Online Banking'),
-(162, 3, 162, '2020-04-15 12:52:25', 'Online Banking'),
-(163, 3, 163, '2020-04-15 12:58:04', 'Online Banking'),
-(164, 3, 164, '2020-04-15 13:02:13', 'Online Banking'),
-(165, 3, 165, '2020-04-15 14:30:32', 'Online Banking'),
-(166, 3, 166, '2020-04-15 14:31:27', 'Online Banking'),
-(167, 3, 167, '2020-04-15 14:31:52', 'Online Banking'),
-(168, 3, 168, '2020-04-15 14:38:29', 'Online Banking'),
-(169, 3, 169, '2020-04-15 14:40:03', 'Online Banking'),
-(170, 3, 170, '2020-04-15 14:46:13', 'Online Banking'),
-(171, 3, 171, '2020-04-15 14:51:06', 'Online Banking'),
-(172, 3, 172, '2020-04-15 17:28:14', 'Online Banking'),
-(173, 3, 173, '2020-04-15 17:30:52', 'Online Banking'),
-(174, 3, 174, '2020-04-15 17:31:12', 'Online Banking'),
-(175, 3, 175, '2020-04-15 17:31:26', 'Online Banking'),
 (51, 7, 51, '2017-11-14 19:46:52', 'Online Banking'),
 (52, 7, 52, '2017-11-14 19:47:08', 'Online Banking'),
 (53, 8, 53, '2017-11-14 19:59:04', 'Online Banking'),
 (54, 8, 54, '2017-11-14 20:36:46', 'Online Banking'),
-(55, 8, 55, '2017-11-14 20:37:01', 'Online Banking'),
-(71, 9, 71, '2020-04-14 13:50:19', 'Online Banking'),
-(72, 9, 72, '2020-04-14 13:54:40', 'Online Banking');
+(55, 8, 55, '2017-11-14 20:37:01', 'Online Banking');
 
 --
 -- Triggers `order_user`
@@ -889,13 +604,13 @@ INSERT INTO `side_effects` (`M_ID`, `S_ID`) VALUES
 (1, 3),
 (2, 3),
 (3, 5),
-(3, 6),
 (4, 5),
+(3, 6),
 (4, 6),
 (5, 12),
 (7, 15),
-(7, 16),
-(10, 15);
+(10, 15),
+(7, 16);
 
 --
 -- Triggers `side_effects`
@@ -936,9 +651,9 @@ CREATE TABLE `stock` (
 --
 
 INSERT INTO `stock` (`M_ID`, `W_ID`, `quantity`, `expdate`, `mandate`) VALUES
-(1, 1, 960, '2020-10-10', '2017-10-10'),
-(2, 1, 981, '2020-10-10', '2017-10-10'),
-(3, 1, 997, '2020-10-10', '2017-10-10'),
+(1, 1, 1000, '2020-10-10', '2017-10-10'),
+(2, 1, 1000, '2020-10-10', '2017-10-10'),
+(3, 1, 1000, '2020-10-10', '2017-10-10'),
 (4, 2, 1000, '2020-10-10', '2017-10-10'),
 (5, 2, 1000, '2020-10-10', '2017-10-10'),
 (6, 1, 1000, '2020-10-10', '2017-10-10'),
@@ -1021,25 +736,25 @@ CREATE TABLE `treats` (
 
 INSERT INTO `treats` (`M_ID`, `S_ID`) VALUES
 (1, 1),
-(1, 2),
 (2, 1),
+(1, 2),
 (2, 2),
 (3, 4),
 (4, 4),
 (5, 7),
 (5, 8),
+(6, 8),
 (5, 9),
+(6, 9),
 (5, 10),
 (5, 11),
-(6, 8),
-(6, 9),
 (7, 13),
 (7, 14),
 (8, 17),
-(8, 18),
-(8, 19),
 (9, 17),
+(8, 18),
 (9, 18),
+(8, 19),
 (9, 19),
 (10, 20),
 (10, 21);
@@ -1090,11 +805,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`U_ID`, `email`, `password`, `first_name`, `last_name`, `phone_no`, `DOB`, `type`, `gender`, `PIN`, `house_no`, `walletamt`) VALUES
-(1, 'kaddi@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Siddharth', 'Kaddi', 2147483647, '1999-12-12', 'reseller', 'M', 560037, '#420', 88768),
-(3, 'imlucky@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Likith', 'R', 2147483647, '2000-10-03', 'admin', 'M', 560087, '#108', 95097),
-(8, 'dinzz@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Dinakar', 'S', 2147483647, '1999-01-01', 'reseller', 'M', 560067, '#690', 77777),
-(9, 'geetha@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'Geetha', 'Shekar', 2147483647, '1969-04-09', 'normal', 'O', 560087, '#108', 0),
-(10, 'chiruc@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Chiru', 'C', 2147483647, '2005-10-10', 'normal', 'O', 101010, '#108', 0);
+(1, 'kaddi@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Siddharth', 'Kaddi', 9999000099, '1999-12-12', 'reseller', 'M', 560037, '#420', 88888),
+(8, 'dinzz@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Dinakar', 'S', 9988998899, '1999-01-01', 'reseller', 'M', 560067, '#690', 77777),
+(3, 'imlucky@gmail.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Likith', 'R', 9900990099, '2000-10-3', 'admin', 'M', 560087, '#108', 99999);
 
 --
 -- Triggers `user`
@@ -1281,7 +994,7 @@ ALTER TABLE `medicine`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `O_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `O_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `symptoms`
@@ -1293,7 +1006,7 @@ ALTER TABLE `symptoms`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `U_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -1339,11 +1052,38 @@ ALTER TABLE `order_medicine`
   ADD CONSTRAINT `checkOID4` FOREIGN KEY (`O_ID`) REFERENCES `order` (`O_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `order_user`
+--
+--ALTER TABLE `order_user`
+--  ADD CONSTRAINT `checkOID` FOREIGN KEY (`O_ID`) REFERENCES `order` (`O_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+--  ADD CONSTRAINT `checkUID3` FOREIGN KEY (`U_ID`) REFERENCES `user` (`U_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `side_effects`
+--
+ALTER TABLE `side_effects`
+  ADD CONSTRAINT `Check MID2` FOREIGN KEY (`M_ID`) REFERENCES `medicine` (`M_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Check SID2` FOREIGN KEY (`S_ID`) REFERENCES `symptoms` (`S_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `stock`
 --
 ALTER TABLE `stock`
   ADD CONSTRAINT `checkMID5` FOREIGN KEY (`M_ID`) REFERENCES `medicine` (`M_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `checkWID1` FOREIGN KEY (`W_ID`) REFERENCES `stockreserve` (`W_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `treats`
+--
+ALTER TABLE `treats`
+  ADD CONSTRAINT `Check MID1` FOREIGN KEY (`M_ID`) REFERENCES `medicine` (`M_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Check SID1` FOREIGN KEY (`S_ID`) REFERENCES `symptoms` (`S_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `checkPIN2` FOREIGN KEY (`PIN`) REFERENCES `pin_address` (`PIN`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
