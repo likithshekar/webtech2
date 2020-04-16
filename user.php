@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
   $count = mysqli_num_rows($result);
+
   if ($count == 1) {
     $_SESSION['login_user'] = $myusername;
     $_SESSION['login_id'] = $row['U_ID'];
