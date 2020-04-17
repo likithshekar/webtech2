@@ -4,7 +4,6 @@ import sys
 import numpy as np
 import MySQLdb
 
-
 print("Content-Type: text/html\n")
 
 '''
@@ -88,6 +87,6 @@ def predict(pop):
 p = len(data)
 #print('\n'+40*'=')
 #print('The given sequence was:\n', *np.array(data)[:,1])
-print('\nBased on learned data, next three predicted numbers in the sequence are {:,.1f}, {:,.1f}, {:,.1f}'.format(predict(p).item(), predict(p+1).item(), predict(p+2).item()))
+print('\nBased on learned data, the three most likely Medicine IDs (M_ID)s that will be bought next in the sequence are {:,.1f}, {:,.1f}, {:,.1f}'.format(predict(p).item(), predict(p+1).item(), predict(p+2).item()))
 
 #print('\nNOTE: The code uses linear regression model exclusively and tries to fit a "straight" line to the data. For polynominal it ought to be added theta_2 and beyond.')
