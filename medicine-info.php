@@ -11,65 +11,77 @@
     <meta name="author" content="PESU Proj">
     <link rel="icon" href="img/favicon.png">
 
-
     <!-- CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/jumbotron.css" rel="stylesheet">
-    <link href="css/material.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <!-- Javascript -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- Javascript -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
 
-    <!-- Additional Styles -->
-    <style type="text/css">
-        #ad {
-            max-width: 800px;
-            max-height: 700px;
-            height: auto;
-            position: relative;
-            overflow: auto;
-            overflow-x:hidden;
-            padding-left: 30px;
-            border: solid rgba(0, 0, 255, 0.075) 3px;
-    </style>
-
+  <!-- Additional Styles -->
+  <style type="text/css">
+      #ad {
+          max-width: 800px;
+          max-height: 700px;
+          height: auto;
+          position: relative;
+          overflow: auto;
+          overflow-x:hidden;
+          padding-left: 30px;
+          border: solid rgba(0, 0, 255, 0.075) 3px;
+      }
+  </style>
 </head>
 
-<body>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Navigation</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Medicine Info <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="user.html">Log - In</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
-
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <!--banner-->
+    <section id="banner" class="banner">
+        <div class="bg-color">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+                            <a class="navbar-brand" href="#"><img src="img/logo.png" class="img-responsive" style="width: 140px; margin-top: -16px;"></a>
+                        </div>
+                        <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#banner">Home</a></li>
+                                <li class=""><a href="index.html">Search</a></li>
+                                <li class="active"><a href="#service">Medicine Info</a></li>
+                                <li class=""><a href="user.html">Sign-Up/Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="banner-info">
+                        <div class="banner-logo text-center">
+                            <img src="img/logo.png" class="img-responsive">
+                        </div>
+                        <div class="overlay-detail text-center">
+                            <a href="#service"><i class="fa fa-angle-down"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Main WebPage -->
     <div class="jumbotron">
-        <h3 class="display-4" align="center">Medicine Info</h3>
+        <h3 id=service class="display-4" align="center">Medicine Info</h3>
       	<br /><br />
 
         <?php
@@ -239,12 +251,56 @@
               mysqli_close($db);
 
         ?>
-
-
       <br />
       <br />
     </div>
+    <!--footer-->
+    <footer id="footer">
+        <div class="top-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">About Us</h4>
+                        </div>
+                        <div class="info-sec">
+                            <p>We are a pharmaceutical website who aim to make madicine available to all at the click of a button.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">Quick Links</h4>
+                        </div>
+                        <div class="info-sec">
+                            <ul class="quick-info">
+                                <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
+                                <li><a href="#search"><i class="fa fa-circle"></i>Search</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">Follow us</h4>
+                        </div>
+                        <div class="info-sec">
+                            <ul class="social-icon">
+                                <li class="bglight-blue"><i class="fa fa-facebook"></i></li>
+                                <li class="bgred"><i class="fa fa-google-plus"></i></li>
+                                <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>
+                                <li class="bglight-blue"><i class="fa fa-twitter"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer-->
 
-
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="contactform/contactform.js"></script>
 </body>
 </html>

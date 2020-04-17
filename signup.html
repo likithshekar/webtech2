@@ -11,123 +11,194 @@
     <link rel="icon" href="img/favicon.png">
 
     <!--CSS-->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/jumbotron.css" rel="stylesheet">
-    <link href="css/material.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <!-- Javascript -->
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+
     <title>Sign-Up</title>
 </head>
 
-<body>
-
-
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.html">Navigation</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="user.html">Log - In</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <!--banner-->
+    <section id="banner" class="banner">
+        <div class="bg-color">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#"><img src="img/logo.png" class="img-responsive" style="width: 140px; margin-top: -16px;"></a>
+                        </div>
+                        <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#banner">Home</a></li>
+                                <li class=""><a href="index.html">Search</a></li>
+                                <li class=""><a href="user.html">Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="banner-info">
+                        <div class="banner-logo text-center">
+                            <img src="img/logo.png" class="img-responsive">
+                        </div>
+                        <div class="overlay-detail text-center">
+                            <a href="#service"><i class="fa fa-angle-down"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+    </section>
 
     <br /><br /><br /><br />
-    <h3 class="display-4" align="center">Sign Up!</h3>
+    <h3 id="service" class="display-4" align="center">Sign Up!</h3>
 
     <!-- Main WebPage -->
     <link href="css/style.css" rel="stylesheet">
-    <div id="Sign-Up" class="formsign" style="width: 70%; margin-left: 17%; margin-top: 100px;">
-        <fieldset>
-            <legend>Registration Form</legend>
-            <table border="0">
-                <tr>
-                    <form method="POST" action="sign-up.php" class="formsign">
-                        <td>First Name</td>
-                        <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="fname" required="required"></td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td> <input type="text" name="lname" required="true"></td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td> <input type="email" name="email" required="true"></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td> <input type="password" name="pass" required="true"></td>
-                </tr>
-                <tr>
-                    <td>Type Of User </td>
-                    <td><input type="radio" name="type" value="normal" checked> Self-Use<br>
-                        <input type="radio" name="type" value="reseller"> Reseller
-                    </td>
-                </tr>
-                <tr>
-                    <td>Mobile Number</td>
-                    <td> <input type="number" name="mno" required="true"></td>
-                </tr>
-                <tr>
-                    <td>Date of Birth </td>
-                    <td><input type="date" name="dob" required="true"></td>
-                </tr>
-                <tr>
-                    <td>Gender </td>
-                    <td><input type="radio" name="gender" value="M" checked> Male<br>
-                        <input type="radio" name="gender" value="F"> Female<br>
-                        <input type="radio" name="gender" value="O"> Other
-                    </td>
-                </tr>
-                <tr>
-                    <td>House Number </td>
-                    <td><input type="text" name="hno" required="true"></td>
-                </tr>
-                <tr>
-                    <td>PIN</td>
-                    <td><input type="number" name="pin" required="true"></td>
-                </tr>
-                <tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <td><input id="button" class="btn btn-danger" type="submit" style="margin-left: 100px;" name="submit" value="Sign-Up" title="Sign Up"></td>
-                </tr>
-                </form>
-            </table>
-        </fieldset>
+    <div id="Sign-Up" class="form" style="width: 70%; margin-left: 17%; margin-top: 100px;">
+        <legend>Registration Form</legend>
+        <form action="sign-up.php" method="post" role="form" class="contactForm">
+            <div class="form-group">
+                <input type="text" name="fname" class="form-control br-radius-zero" id="fname" placeholder="First Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required="true" />
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="lname" class="form-control br-radius-zero" id="lname" placeholder="Last Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required="true" />
+                <div class=" validation"></div>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control br-radius-zero" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" required="true" />
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control br-radius-zero" name="pass" id="pass" placeholder="Password" data-rule="minlen:5" data-msg="Please enter at least 5 chars " />
+                <div class="validation"></div>
+            </div>
+            <div class="form-radio">
+                <label>Type of User</label><br/>
+                <div class="radio">
+                    <label>
+                    <input type="radio" name="type" class="type" value="normal" checked="checked">
+                    <i class="helper"></i>
+                    Normal
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                    <input type="radio" name="type" class="type" value="reseller">
+                    <i class="helper"></i>
+                    Reseller
+                    </label>
+                </div>
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <input type="number" name="mno" class="form-control br-radius-zero" id="mno" placeholder="Mobile Number" data-rule="minlen:10" data-msg="Please enter at least 10 chars" required="true" />
+                <div class=" validation"></div>
+            </div>
+            <div class="form-group">
+                <input type="date" name="dob" class="form-control br-radius-zero" id="dob" placeholder="Date of Birth" data-msg="Please enter Your Date of Birty" required="true" />
+                <div class=" validation"></div>
+            </div>
+            <div class="form-radio">
+                <label>Gender</label>
+                <div class="radio">
+                    <label>
+                    <input type="radio" name="gender" class="gender" value="M" checked="checked">
+                    <i class="helper"></i>
+                    Male
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                    <input type="radio" name="gender" class="gender" value="F">
+                    <i class="helper"></i>
+                    Female
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                    <input type="radio" name="gender" class="gender" value="O">
+                    <i class="helper"></i>
+                    Other
+                    </label>
+                </div>
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="hno" class="form-control br-radius-zero" id="hno" placeholder="House Number" data-rule="text" required="true" />
+                <div class="validation"></div>
+            </div>
+            <div class="form-group">
+                <input type="number" name="pin" class="form-control br-radius-zero" id="pin" placeholder="PIN" data-rule="number" data-msg="Please enter a number and at least 6 chars" required="true" />
+                <div class="validation"></div>
+            </div>
+            <div class="form-action">
+                <button type="submit" class="btn btn-form">Submit</button>
+            </div><br /><br />
+        </form>
     </div>
-
-
+    <!--footer-->
+    <footer id="footer">
+        <div class="top-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">About Us</h4>
+                        </div>
+                        <div class="info-sec">
+                            <p>We are a pharmaceutical website who aim to make madicine available to all at the click of a button.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">Quick Links</h4>
+                        </div>
+                        <div class="info-sec">
+                            <ul class="quick-info">
+                                <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
+                                <li><a href="#service"><i class="fa fa-circle"></i>Search</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 marb20">
+                        <div class="ftr-tle">
+                            <h4 class="white no-padding">Follow us</h4>
+                        </div>
+                        <div class="info-sec">
+                            <ul class="social-icon">
+                                <li class="bglight-blue"><i class="fa fa-facebook"></i></li>
+                                <li class="bgred"><i class="fa fa-google-plus"></i></li>
+                                <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>
+                                <li class="bglight-blue"><i class="fa fa-twitter"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--/ footer-->
+    <script src="js/jquery.min.js "></script>
+    <script src="js/jquery.easing.min.js "></script>
+    <script src="js/bootstrap.min.js "></script>
+    <script src="js/custom.js "></script>
 </body>
 
 </html>
